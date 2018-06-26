@@ -9,6 +9,8 @@
             - [IMBRWalletNetConfigDelegate](#imbrwalletnetconfigdelegate)
             - [Language](#language)
             - [MBRWalletNetConfig](#mbrwalletnetconfig)
+- [关键业务时序图](#关键业务时序图)
+	- [支付时序图](#支付时序图)
 - [SDK接口文档](#sdk接口文档)
     - [密码接口](#密码接口)
         - [是否有密码](#是否有密码)
