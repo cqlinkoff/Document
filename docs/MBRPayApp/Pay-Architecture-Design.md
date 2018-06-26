@@ -21,7 +21,7 @@ ETH三方库。
 
 -  **MBRPayCore**
 支付业务核心库，提供所有业务逻辑相关功能，UnitPay、COSPay等App调用MBRPayCore，复用同一套业务逻辑代码，方便维护。不同的Pay APP只在UI层做区分。
-下图为MBRPayCore分层结构和编码规范：
+下图为MBRPayCore分层结构和编码规范示例：
 
 <img src="https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRPayApp/Pay%20App%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.png" width="1200"/>
 
