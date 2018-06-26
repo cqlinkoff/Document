@@ -15,7 +15,7 @@
 ETH三方库。
 
 -  **MBRWallet**
-钱包SDK，提供钱包相关所有功能，供支付APP和需要内置钱包业务的三方APP使用
+钱包SDK，提供钱包相关所有功能，供内部各种Pay APP和需要内置钱包业务的三方APP使用
 
 <img src="https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRPayApp/MBRWallet%E7%B1%BB%E5%9B%BE.jpeg" width="800"/>
 
