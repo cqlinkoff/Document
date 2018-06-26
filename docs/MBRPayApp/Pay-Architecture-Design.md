@@ -4,7 +4,7 @@
 
 ![avatar](https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRPayApp/Pay%E7%BB%84%E4%BB%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
-### 库说明
+### 库设计
 
 -  **MBRWalletNetworking**
 支付业务网络库，封装了所有服务端API，给上层提供网络数据。
