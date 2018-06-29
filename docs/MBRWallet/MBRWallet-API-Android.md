@@ -119,8 +119,8 @@ channel                       | 渠道号              |必选项，渠道号联
 
 ## Demo
 - Demo地址：
-https://github.com/cqmbr/MBRWallet-Android.git
-</br>
+https://github.com/cqmbr/MBRWallet-Android.git </br>
+
 - Demo使用说明：
     demo代码位于wallet-demo目录，使用Android Studio导入即可运行。
 
