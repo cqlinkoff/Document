@@ -621,3 +621,6 @@ PAY_FEE_NOT_ENOUGH_ERROR            |  矿工费不足                   |  账�
 FINGER_UNAVAILABLE_ERROR            |  设备不支持touchid            |
 FINGERPRINT_ERROR                   |  touchid验证失败              |
 ACCOUNT_COIN_NOT_EXIST_ERROR        |  账户中代币不存在              |
+NO_WALLET_ERROR_CODE            	|  没有设置当前钱包            |多钱包模式，若未设置钱包id，调用API的情况下会检测此配置
+WALLET_MODE_NOT_SUPPORTED_CODE      |  用户模式不支持              |
+WALLET_DELETE_FAIL_CODE        		|  钱包数据删除失败              |
