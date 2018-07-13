@@ -1,5 +1,5 @@
 <!-- TOC -->
-
+- [版本记录](#版本记录)
 - [SDK集成](#sdk集成)
     - [使用说明](#使用说明)
     - [初始化](#初始化)
@@ -9,9 +9,10 @@
             - [IMBRWalletNetConfigDelegate](#imbrwalletnetconfigdelegate)
             - [Language](#language)
             - [MBRWalletNetConfig](#mbrwalletnetconfig)
-- [关键业务时序图](#关键业务时序图)
-	- [支付时序图](#支付时序图)
 - [SDK接口文档](#sdk接口文档)
+    - [钱包接口](#钱包接口)
+    	- [设置当前钱包](#设置当前钱包)
+    	- [清除钱包数据](#清除钱包数据)
     - [密码接口](#密码接口)
         - [是否有密码](#是否有密码)
         - [是否有密码提示](#是否有密码提示)
@@ -21,6 +22,7 @@
         - [修改密码](#修改密码)
     - [币接口](#币接口)
         - [同步所有币](#同步所有币)
+        - [根据币种id获取币种信息](#根据币种id获取币种信息)
         - [获取所有币列表](#获取所有币列表)
         - [获取强制的币列表](#获取强制的币列表)
         - [获取非强制币列表](#获取非强制币列表)
@@ -55,13 +57,22 @@
         - [密码转账](#密码转账)
 
 <!-- /TOC -->
+
+## 版本记录
+2018-07-01
+--------------------------------------------------
+- 新增API [[根据币种id获取币种信息](#根据币种id获取币种信息)] [[钱包接口](#钱包接口)]
+- 更新配置参数[ [MBRWalletNetConfig](#mbrwalletnetconfig)]
+- 支持钱包多模式
+- 升级 `lib_wallet` 版本号: **`1.0.8.beta`**
+
 ## SDK集成
 
 ### 使用说明
 
 - 环境：AndroidStudio
 - 配置：在主工程下的build.gradle中添加maven配置
-```
+```groovy
 	maven { url "http://47.100.116.120:9992/repository/android_public"}
     credentials {
         username "user_read"
@@ -70,8 +81,8 @@
 ```
 
 - 版本依赖：
-```
-	compile('com.mbr.android.wallet:lib_wallet:1.0.0.beta')
+```groovy
+	compile('com.mbr.android.wallet:lib_wallet:1.0.8.beta')
 ```
 
 ### 初始化
@@ -80,7 +91,9 @@
 
 #### 方法
 
+```java
 MBRWallet.instance().init(IMBRWalletConfigDelegate delegate);
+```
 
 #### 参数
 
@@ -89,8 +102,9 @@ MBRWallet.instance().init(IMBRWalletConfigDelegate delegate);
 参数名                       |说明             | 备注
 ----------------------------|--------------------|-------
 chain                       | 测试链：-1 ；主链：1  |可选项，默认为主链
-accountNamePrefixId         | 账户的默认昵称前缀 id |可选项，接入方可调用autoAccountName()方法创建默认昵称
-IMBRWalletNetConfigDelegate | 网络配置         |必选项【[查看IMBRWalletNetConfigDelegate](#imbrwalletnetconfigdelegate)】
+walletMode                  | 钱包模式             |可选项，默认为单钱包模式。(单模式：0) 多模式（1）
+accountNamePrefixId         | 账户的默认昵称前缀 id  |可选项，接入方可调用autoAccountName()方法创建默认昵称
+IMBRWalletNetConfigDelegate | 网络配置             |必选项【[查看IMBRWalletNetConfigDelegate](#imbrwalletnetconfigdelegate)】
 
 ##### IMBRWalletNetConfigDelegate
 
@@ -114,23 +128,34 @@ Locale.KOREAN                 |  ko_KR             |
 
 属性                           |属性说明               | 备注
 ----------------------------- |--------------------|-------------------
-host                          | 服务端地址           |可选项,默认为钱包地址
-channel                       | 渠道号              |必选项，渠道号联系服务端人员分配
-
-## Demo
-- Demo地址：
-https://github.com/cqmbr/MBRWallet-Android.git </br>
-
-- Demo使用说明：
-    demo代码位于wallet-demo目录，使用Android Studio导入即可运行。
-
-## 关键业务时序图
-
-### 支付时序图
-
-![avatar](https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRWallet/%E5%86%85%E7%BD%AE%E9%92%B1%E5%8C%85SDK%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B.png)
+host                          | 服务端地址           |可选项，默认为钱包地址
+channel                       | 渠道号              |必选项，由服务端分配
+merchantId                    | 商户id              |必选项，由服务端分配
+privateKey                    | 私钥                |必选项，RSA2048，接入方提供
 
 ## SDK接口文档
+
+### 钱包接口
+
+#### 设置当前钱包
+
+```java
+     /**
+     * 设置当前钱包
+     * @param id 钱包id
+     * @throws MBRWalletException
+     */
+    public void setCurrentWallet(String id) throws MBRWalletException;
+```
+#### 清理钱包数据
+
+```java
+      /**
+     * 清理钱包数据
+     * @throws MBRWalletException
+     */
+    public void clearCurrentWallet() throws MBRWalletException;
+```
 
 ### 密码接口
 
@@ -210,6 +235,16 @@ https://github.com/cqmbr/MBRWallet-Android.git </br>
      * @throws MBRWalletException
      */
     void syncAllCoinList() throws MBRWalletException;
+```
+#### 根据币种id获取币种信息
+```java
+    /**
+     * 根据coinId获取Coin信息
+     * @param coinId
+     * @return 返回币种信息
+     * @throws MBRWalletException
+     */
+     MBRBgCoin getCoin(String coinId) throws MBRWalletException
 ```
 
 #### 获取所有币列表
@@ -609,6 +644,9 @@ https://github.com/cqmbr/MBRWallet-Android.git </br>
 错误                          |含义               | 备注
 ----------------------------- |--------------------|-------------------
 CONFIG_ERROR                  |  配置错误             | 钱包配置错误，抛出此异常
+NO_WALLET_ERROR               |  无钱包             | 多钱包模式，若未设置钱包id，调用API的情况下会检测此配置
+WALLET_MODE_NOT_SUPPORTED     |  模式不支持          |
+WALLET_DELETE_FAIL            |  钱包数据删除失败     |
 PASSWORD_NO_ERROR             |  没有密码           | 无密码，需先设置密码
 PASSWORD_EMPTY_ERROR          |  密码为空             |
 PASSWORD_LONG_ERROR           |  密码太长             |密码长度：8~50
@@ -648,3 +686,4 @@ PAY_FINGER_CHANGED_ERROR 	|  指纹已改变  |
 PAY_FEE_INPUT_RANGE_ERROR 	|  矿工费输入范围错误  | [矿工费范围参照接口](#获取Gas信息)
 PAY_FEE_NOT_ENOUGH_ERROR 	| 矿工费不足  | 账户的余额不足以支付矿工费
 PAY_BALANCE_NOT_ENOUGH_ERROR |  余额不足 |账户的余额不足
+

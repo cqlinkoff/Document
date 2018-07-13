@@ -10,6 +10,9 @@
 - [关键业务时序图](#关键业务时序图)
 	- [支付时序图](#支付时序图)
 - [SDK接口文档](#sdk接口文档)
+	- [钱包接口](#钱包接口)
+        - [设置当前钱包](#设置当前钱包)
+        - [清空当前钱包数据](#清空当前钱包数据)
     - [密码接口](#密码接口)
         - [设置交易密码](#设置交易密码)
         - [修改密码](#修改密码)
@@ -75,9 +78,14 @@
 
 参数名                       |说明             | 备注
 ----------------------------|----------------|-------
+channel                     | 渠道号          |必选项，由钱包方分配
+privateKey                  | 私钥            |必选项，RSA2048，由钱包方分配
+merchantId                  | 商户id          |必选项，由钱包方分配
+apiHost                     | 服务端地址       |可选项，不填默认为生产环境地址（测试环境地址：http://47.100.18.6:9900/）
 languageCode                | 语言码          |可选项，默认为中文（可选值见languageCode说明）
-channel                     | 渠道号          |必选项，渠道号联系服务端人员分配
-apiHost                     | 服务端地址       |可选项，不填为默认钱包地址
+walletMode                  | 钱包模式         |可选项，默认为单钱包模式。(单模式：0) 多模式（1）
+
+
 
 languageCode可选值
 
@@ -88,6 +96,13 @@ zh_TW             |繁体中文
 en_US             |英文
 ja_JP             |日文
 ko_KR             |韩文
+
+walletMode可选值
+
+钱包模式                      | 备注
+----------------------------|-------------------
+MBRWWalletModel_Single      |单钱包模式
+MBRWWalletModel_Muti        |多钱包模式（使用场景举例：接入方需要给每个登录用户设置单独的钱包）
 
 ## Demo
 - Demo地址
@@ -107,6 +122,29 @@ https://github.com/cqmbr/MBRWallet-iOS.git
 ![avatar](https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRWallet/%E5%86%85%E7%BD%AE%E9%92%B1%E5%8C%85SDK%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B.png)
 
 ## SDK接口文档
+
+### 钱包接口
+
+#### 设置当前钱包
+```java
+/**
+ 设置当前钱包（如果使用的多钱包模式，需要给钱包设置一个唯一id，id由接入方控制，应用内需要唯一）
+ 
+ @param wId 钱包id
+ @param err 错误信息
+ */
++ (void)setCurrentWalletWithId:(NSString*)wId error:(NSError *__autoreleasing *)err;
+```
+
+#### 清空当前钱包数据
+```java
+/**
+ 清空当前钱包数据(会清除钱包内的密码，账户等所有数据，请慎用)
+ 
+ @param err 错误信息
+ */
++ (void)clearCurrentWalletWithError:(NSError *__autoreleasing *)err;
+```
 
 ### 密码接口
 

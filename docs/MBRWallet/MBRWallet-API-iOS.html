@@ -19,7 +19,9 @@
 </li><li><a href="#demo">Demo</a></li><li><a href="#关键业务时序图">关键业务时序图</a><ul>
 <li><a href="#支付时序图">支付时序图</a></li></ul>
 </li><li><a href="#sdk接口文档">SDK接口文档</a><ul>
-<li><a href="#密码接口">密码接口</a><ul>
+<li><a href="#钱包接口">钱包接口</a><ul>
+<li><a href="#设置当前钱包">设置当前钱包</a></li><li><a href="#清空当前钱包数据">清空当前钱包数据</a></li></ul>
+</li><li><a href="#密码接口">密码接口</a><ul>
 <li><a href="#设置交易密码">设置交易密码</a></li><li><a href="#修改密码">修改密码</a></li><li><a href="#是否已设置密码">是否已设置密码</a></li><li><a href="#密码是否相同">密码是否相同</a></li><li><a href="#设置密码提示">设置密码提示</a></li><li><a href="#获取密码提示">获取密码提示</a></li></ul>
 </li><li><a href="#币接口">币接口</a><ul>
 <li><a href="#同步币列表">同步币列表</a></li><li><a href="#获取所有币列表">获取所有币列表</a></li><li><a href="#获取必选币列表">获取必选币列表</a></li><li><a href="#获取非必选币列表">获取非必选币列表</a></li><li><a href="#获取矿工费默认值">获取矿工费默认值</a></li><li><a href="#获取矿工费最大值">获取矿工费最大值</a></li><li><a href="#获取矿工费最小值">获取矿工费最小值</a></li></ul>
@@ -43,19 +45,34 @@
 </thead>
 <tbody>
 <tr>
+<td>channel</td>
+<td>渠道号</td>
+<td>必选项，由钱包方分配</td>
+</tr>
+<tr>
+<td>privateKey</td>
+<td>私钥</td>
+<td>必选项，RSA2048，由钱包方分配</td>
+</tr>
+<tr>
+<td>merchantId</td>
+<td>商户id</td>
+<td>必选项，由钱包方分配</td>
+</tr>
+<tr>
+<td>apiHost</td>
+<td>服务端地址</td>
+<td>可选项，不填默认为生产环境地址（测试环境地址：<a href="http://47.100.18.6:9900/）">http://47.100.18.6:9900/）</a></td>
+</tr>
+<tr>
 <td>languageCode</td>
 <td>语言码</td>
 <td>可选项，默认为中文（可选值见languageCode说明）</td>
 </tr>
 <tr>
-<td>channel</td>
-<td>渠道号</td>
-<td>必选项，渠道号联系服务端人员分配</td>
-</tr>
-<tr>
-<td>apiHost</td>
-<td>服务端地址</td>
-<td>可选项，不填为默认钱包地址</td>
+<td>walletMode</td>
+<td>钱包模式</td>
+<td>可选项，默认为单钱包模式。(单模式：0) 多模式（1）</td>
 </tr>
 </tbody>
 </table><p>languageCode可选值</p><table>
@@ -87,13 +104,56 @@
 <td>韩文</td>
 </tr>
 </tbody>
+</table><p>walletMode可选值</p><table>
+<thead>
+<tr>
+<th>钱包模式</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MBRWWalletModel_Single</td>
+<td>单钱包模式</td>
+</tr>
+<tr>
+<td>MBRWWalletModel_Muti</td>
+<td>多钱包模式（使用场景举例：接入方需要给每个登录用户设置单独的钱包）</td>
+</tr>
+</tbody>
 </table><h2 id="demo"><a name="demo" href="#demo"></a>Demo</h2><ul>
 <li><p>Demo地址<br><a href="https://github.com/cqmbr/MBRWallet-iOS.git">https://github.com/cqmbr/MBRWallet-iOS.git</a></p>
 </li><li><p>Demo使用说明<br>  1、打开终端，在Sample目录执行如下命令：</p>
 <pre><code data-origin="<pre><code>  pod udpate
 </code></pre>">  pod udpate
 </code></pre><p>  2、打开WalletDemo.xcworkspace运行</p>
-</li></ul><h2 id="关键业务时序图"><a name="关键业务时序图" href="#关键业务时序图"></a>关键业务时序图</h2><h3 id="支付时序图"><a name="支付时序图" href="#支付时序图"></a>支付时序图</h3><p><img src="https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRWallet/%E5%86%85%E7%BD%AE%E9%92%B1%E5%8C%85SDK%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B.png" alt="avatar"></p><h2 id="sdk接口文档"><a name="sdk接口文档" href="#sdk接口文档"></a>SDK接口文档</h2><h3 id="密码接口"><a name="密码接口" href="#密码接口"></a>密码接口</h3><h4 id="设置交易密码"><a name="设置交易密码" href="#设置交易密码"></a>设置交易密码</h4><pre class="java hljs"><code class="java" data-origin="<pre><code class=&quot;java&quot;>/**
+</li></ul><h2 id="关键业务时序图"><a name="关键业务时序图" href="#关键业务时序图"></a>关键业务时序图</h2><h3 id="支付时序图"><a name="支付时序图" href="#支付时序图"></a>支付时序图</h3><p><img src="https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRWallet/%E5%86%85%E7%BD%AE%E9%92%B1%E5%8C%85SDK%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B.png" alt="avatar"></p><h2 id="sdk接口文档"><a name="sdk接口文档" href="#sdk接口文档"></a>SDK接口文档</h2><h3 id="钱包接口"><a name="钱包接口" href="#钱包接口"></a>钱包接口</h3><h4 id="设置当前钱包"><a name="设置当前钱包" href="#设置当前钱包"></a>设置当前钱包</h4><pre class="java hljs"><code class="java" data-origin="<pre><code class=&quot;java&quot;>/**
+ 设置当前钱包（如果使用的多钱包模式，需要给钱包设置一个唯一id，id由接入方控制，应用内需要唯一）
+
+ @param wId 钱包id
+ @param err 错误信息
+ */
++ (void)setCurrentWalletWithId:(NSString*)wId error:(NSError *__autoreleasing *)err;
+</code></pre>"><span class="hljs-javadoc">/**
+ 设置当前钱包（如果使用的多钱包模式，需要给钱包设置一个唯一id，id由接入方控制，应用内需要唯一）
+
+<span class="hljs-javadoctag"> @param</span> wId 钱包id
+<span class="hljs-javadoctag"> @param</span> err 错误信息
+ */</span>
++ (<span class="hljs-keyword">void</span>)setCurrentWalletWithId:(NSString*)wId error:(NSError *<span class="hljs-number">__</span>autoreleasing *)err;
+</code></pre><h4 id="清空当前钱包数据"><a name="清空当前钱包数据" href="#清空当前钱包数据"></a>清空当前钱包数据</h4><pre class="java hljs"><code class="java" data-origin="<pre><code class=&quot;java&quot;>/**
+ 清空当前钱包数据(会清除钱包内的密码，账户等所有数据，请慎用)
+
+ @param err 错误信息
+ */
++ (void)clearCurrentWalletWithError:(NSError *__autoreleasing *)err;
+</code></pre>"><span class="hljs-javadoc">/**
+ 清空当前钱包数据(会清除钱包内的密码，账户等所有数据，请慎用)
+
+<span class="hljs-javadoctag"> @param</span> err 错误信息
+ */</span>
++ (<span class="hljs-keyword">void</span>)clearCurrentWalletWithError:(NSError *<span class="hljs-number">__</span>autoreleasing *)err;
+</code></pre><h3 id="密码接口"><a name="密码接口" href="#密码接口"></a>密码接口</h3><h4 id="设置交易密码"><a name="设置交易密码" href="#设置交易密码"></a>设置交易密码</h4><pre class="java hljs"><code class="java" data-origin="<pre><code class=&quot;java&quot;>/**
  设置交易密码
 
  @param pwd 密码
