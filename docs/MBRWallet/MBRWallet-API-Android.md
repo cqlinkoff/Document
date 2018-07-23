@@ -9,6 +9,9 @@
             - [IMBRWalletNetConfigDelegate](#imbrwalletnetconfigdelegate)
             - [Language](#language)
             - [MBRWalletNetConfig](#mbrwalletnetconfig)
+- [Demo](#demo)
+- [关键业务时序图](#关键业务时序图)
+	- [支付时序图](#支付时序图)
 - [SDK接口文档](#sdk接口文档)
     - [钱包接口](#钱包接口)
     	- [设置当前钱包](#设置当前钱包)
@@ -132,6 +135,20 @@ host                          | 服务端地址           |可选项，默认为
 channel                       | 渠道号              |必选项，由服务端分配
 merchantId                    | 商户id              |必选项，由服务端分配
 privateKey                    | 私钥                |必选项，RSA2048，接入方提供
+
+
+## Demo
+- Demo地址：
+https://github.com/cqmbr/MBRWallet-Android.git </br>
+
+- Demo使用说明：
+    demo代码位于wallet-demo目录，使用Android Studio导入即可运行。
+
+## 关键业务时序图
+
+### 支付时序图
+
+![avatar](https://raw.githubusercontent.com/cqmbr/MBRDocument/master/docs/MBRWallet/%E5%86%85%E7%BD%AE%E9%92%B1%E5%8C%85SDK%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B.png)
 
 ## SDK接口文档
 
