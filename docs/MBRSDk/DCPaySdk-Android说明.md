@@ -36,15 +36,3 @@
 ### 3.服务端同步支付结果。
 本地SDK返回的支付结果表示支付请求已经成功发送，实际支付结果以后台同步的结果为准。
 
-代码示例：
-```
-private Handler mHandler = new Handler() { 
-    public void handleMessage(Message msg) { 
-        Result result = new Result((String) msg.obj);
-        Toast.makeText(DemoActivity.this, result.getResult(), Toast.LENGTH_LONG).show(); 
-    }; 
-};
-```
-### 异步通知
-商户需要提供一个http协议的接口，将接口访问地址告知支付服务方。支付最终结果将通过访问该接口告知商户后台。异步通知在链处理了支付请求后进行，共将访问8次，若在某次访问的返回数据的body中包含了success，则不再进行访问。
-对于异步通知的信息通过服务端SDK的httpPayCallBack方法进行处理。
