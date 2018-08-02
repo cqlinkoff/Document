@@ -66,7 +66,7 @@
 2018-08-02
 --------------------------------------------------
 - 优化：网络库post方法
-- 升级 `lib_wallet` 版本号: **`1.0.18.beta`**
+- 升级 `lib_wallet` 版本号: **`1.0.19.beta`**
 
 2018-07-31
 --------------------------------------------------
@@ -97,7 +97,7 @@
 
 - 版本依赖：
 ```groovy
-	compile('com.mbr.android.wallet:lib_wallet:1.0.18.beta')
+	compile('com.mbr.android.wallet:lib_wallet:1.0.19.beta')
 ```
 
 ### 初始化
