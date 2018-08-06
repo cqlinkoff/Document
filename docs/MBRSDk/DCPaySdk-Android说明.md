@@ -1,13 +1,35 @@
 # 安卓端接入说明
 
 ## 导入资源
--	将DCPaySDK.jar包放入应用工程根目录的libs目录下
--	进入应用工程的“Project Structure”，在app module下选择“File dependency”，将libs目录下的DCPaySDK.jar导入。
-    或者在app module下的build.gradle下手动添加依赖，配置如下所示：
+-   在project下的build.gradle->repositories标签下添加仓库
+```
+    maven {
+        url "http://47.100.116.120:9992/repository/android_public"
+        credentials {
+            username "user_read"
+            password "read"
+        }
+    }
+    
+```
+-	在app module下的build.gradle下手动添加依赖，配置如下所示：
 ```
 
-    dependencies {
-        compile files('libs/DCPaySDK.jar')
+    api('com.mbr.pay:lib_sdk:1.0.3.release'){
+        changing=true
+    }
+```
+-   修改app模块下的build.gradle,替换CHANNEL和MERCHANT_ID中的000000
+```
+defaultConfig {
+        applicationId "com.mbr.dcpay.demo"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "CHANNEL", "\"000000\""
+        buildConfigField "String", "MERCHANT_ID", "\"000000\""
     }
 ```
 ## 支付接口调用（可参考Demo实现）
