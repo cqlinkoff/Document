@@ -33,7 +33,12 @@ defaultConfig {
     }
 ```
 ## 支付接口调用（可参考Demo实现）
-###  1.调用支付需要传递一个orderInfo字符串，这个字符串参数来源于应用后台服务器。
+###  1.配置环境
+```
+        //设置当前开发环境，根据环境的不同会下载不同的apk，默认为生产环境
+        EnvConfig.setEnv(EnvConfig.PRE);
+```
+###  2.调用支付需要传递一个orderInfo字符串，这个字符串参数来源于应用后台服务器。
 *   参数名称:   orderInfo
 *   参数说明:   支付请求字符串，String类型， key=value形式，以&连接。
 *   参数示例:   amount=0.01&coinId=34190899187000&merchantId=10000000000003&merchantName=测试商户&orginAmount=10000000000000000&payBillNo=72911335082956&refBizNo=1525186687194&toAddr=0x91f8654587917f3a0c7cfc5fa05bd86dc0162ddb&sign=iS0vfd7pUpiCiFwZuZrbqbklT4cSF0VukZtYALyQmuAyOwjGSGdJPn235bo2rEMvXc5olaD/FiRSujvMXaYmiZZ0sxbYPFoozIdIdK8H33pGBshtoinrfXxlPytGfT+Qqq7GlN300+nb9vQ1yv0xIRyZqxtdIjelN6fPb/SAXt9DeW/CGqRRofbnQ8fB7UqLa+qX5j6dckqgFXQu9mzdZcKM+1f2ffxhgsYlUEl7g9HHWizxMSrYqRL6WRuc0BBQarq1LdCPTHLfzZ81GVg4M+5uHM9URUa7tnstPzMQVEx0cbGLmMLx+7lQWo6Pxp1TWPz8WkApABo0IpllB1jY+g==
