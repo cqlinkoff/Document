@@ -64,5 +64,5 @@ defaultConfig {
 本地SDK返回的支付结果表示支付请求已经成功发送，实际支付结果以后台同步的结果为准。
 ##  Demo
 ### demo地址
-https://github.com/cqmbr/DCPaySDK-Android
+https://github.com/cqmbr/PaySDK-Android
 
