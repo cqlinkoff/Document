@@ -15,7 +15,7 @@
 -	在app module下的build.gradle下手动添加依赖，配置如下所示：
 ```
 
-    api('com.mbr.pay:lib_sdk:1.0.5.release'){
+    api('com.mbr.pay:lib_sdk:1.0.8.release'){
         changing=true
     }
 ```
