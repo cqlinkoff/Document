@@ -34,9 +34,12 @@ defaultConfig {
 ```
 ## 支付接口调用（可参考Demo实现）
 ###  1.配置环境
+可以使用setEnv设置预定义的下载路径，也可以输入自定义的下载链接，只需二者选一。如果都不设置默认使用预生产环境
 ```
-        //设置当前开发环境，根据环境的不同会下载不同的apk，默认为生产环境
-        EnvConfig.setEnv(EnvConfig.PRE);
+        //设置当前开发环境，根据环境的不同会下载不同的apk，默认为预生产环境
+        //EnvConfig.setEnv(EnvConfig.PRE);
+        //设置下载路径
+        EnvConfig.setDownloadUrl("https://guide.chainlong.io");
 ```
 ###  2.调用支付需要传递一个orderInfo字符串，这个字符串参数来源于应用后台服务器。
 *   参数名称:   orderInfo
