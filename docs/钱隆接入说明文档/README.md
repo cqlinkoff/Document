@@ -1,5 +1,5 @@
 
-##ChainLong商户接入说明
+# ChainLong商户接入说明
 
 ### 1、iOS接入说明
 https://github.com/cqlinkoff/PaySDK-iOS/blob/master/docs/MBRPaySDK-iOS.md
